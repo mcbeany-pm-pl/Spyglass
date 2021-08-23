@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mcbeany\Spyglass;
 
 use Mcbeany\Spyglass\item\Spyglass;
+use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\network\mcpe\convert\ItemTranslator;
 use pocketmine\plugin\PluginBase;
@@ -35,7 +36,9 @@ class Main extends PluginBase
         $value[$runtimeId] = $itemId;
         $property->setValue(ItemTranslator::getInstance(), $value);
 
-        ItemFactory::registerItem(new Spyglass(), true);
+        $item = new Spyglass();
+        ItemFactory::registerItem($item, true);
+        Item::addCreativeItem($item);
         // TODO: Crafting recipe
     }
 
