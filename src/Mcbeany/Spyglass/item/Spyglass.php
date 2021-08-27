@@ -11,8 +11,6 @@ class Spyglass extends Item
 
     public const SPYGLASS = 772;
 
-    protected $id = self::SPYGLASS;
-
     public function __construct(int $meta = 0)
     {
         parent::__construct(self::SPYGLASS, $meta, "Spyglass");
