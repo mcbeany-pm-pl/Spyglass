@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Mcbeany\Spyglass;
 
 use Mcbeany\Spyglass\item\Spyglass;
+use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\item\Item;
 use pocketmine\item\ItemFactory;
 use pocketmine\network\mcpe\convert\ItemTranslator;
@@ -12,7 +14,7 @@ use pocketmine\plugin\PluginBase;
 use ReflectionClass;
 use const pocketmine\RESOURCE_PATH;
 
-class Main extends PluginBase
+class Main extends PluginBase implements Listener
 {
 
     public function onEnable()
@@ -40,6 +42,16 @@ class Main extends PluginBase
         ItemFactory::registerItem($item, true);
         Item::addCreativeItem($item);
         // TODO: Crafting recipe
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    }
+
+    public function onItemHeld(PlayerItemHeldEvent $event)
+    {
+        $player = $event->getPlayer();
+        $item = $event->getItem();
+        if ($item->getId() === Spyglass::SPYGLASS) {
+            $player->getInventory()->sendHeldItem($player->getViewers());
+        }
     }
 
 }

@@ -1,7 +1,7 @@
 ---
 name: Spyglass
-version: 0.0.1
+version: 0.0.2
 main: Mcbeany\Spyglass\Main
-api: 3.22.2
+api: 3.20.0
 author: Mcbeany
 ...
